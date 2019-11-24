@@ -1,7 +1,6 @@
 # Diego
 
 Simple go script to monitor the status of your containers.
-Currently it just outputs to stdout
 
 ## Usage
 
@@ -11,8 +10,10 @@ Usage of diego:
         Set executor to watch. (default "docker")
   -interval int
         Interval to watch in milliseconds, if watch supplied. (default 1000)
-  -output string
-        Where to output to. (default "stdout")
+  -prometheus
+        Should the prometheus exporter server enabled
+  -prometheus-port int
+        Port to use for prometheus metrics (default 8000)
   -version
         Print current version
 ```
