@@ -22,6 +22,8 @@ run: build
 	bin/$(BINARY_NAME)
 run-podman: build
 	bin/$(BINARY_NAME) -executor podman
+run-prometheus: build
+	bin/$(BINARY_NAME) -prometheus
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-X github.com/max-wittig/${BINARY_NAME}/version.GitCommit=${GIT_COMMIT}${GIT_DIRTY} -X github.com/max-wittig/${BINARY_NAME}/version.BuildDate=${BUILD_DATE}" -o bin/${BINARY_NAME}
 	cd bin && zip -r $(ZIP_LINUX) $(BINARY_NAME)

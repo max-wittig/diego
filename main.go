@@ -10,14 +10,16 @@ import (
 
 type appOptions struct {
 	containerExecutor string
-	output            string
 	interval          int
+	prometheusPort    int
+	prometheusEnabled bool
 }
 
 func parseOptions() (*appOptions, error) {
 	versionFlag := flag.Bool("version", false, "Print current version")
-	outputFlag := flag.String("output", "stdout", "Where to output to.")
+	prometheusPortFlag := flag.Int("prometheus-port", 8000, "Port to use for prometheus metrics")
 	executorFlag := flag.String("executor", "docker", "Set executor to watch.")
+	prometheusEnabledFlag := flag.Bool("prometheus", false, "Should the prometheus exporter server enabled")
 	intervalFlag := flag.Int("interval", 1000, "Interval to watch in milliseconds, if watch supplied.")
 	flag.Parse()
 	aConfig := appOptions{}
@@ -32,8 +34,9 @@ func parseOptions() (*appOptions, error) {
 	}
 
 	aConfig.containerExecutor = *executorFlag
-	aConfig.output = *outputFlag
 	aConfig.interval = *intervalFlag
+	aConfig.prometheusPort = *prometheusPortFlag
+	aConfig.prometheusEnabled = *prometheusEnabledFlag
 
 	return &aConfig, nil
 }
